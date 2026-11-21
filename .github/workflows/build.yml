@@ -18,7 +18,7 @@ jobs:
         run: |
           $waterCpp = "WorldTravelPatches\src\Water.cpp"
           if (Test-Path $waterCpp) {
-            (Get-Content $waterCpp -Raw) -replace 'reinterpret_cast<uintptr_t>', 'static_cast<uintptr_t>' | Set-Content $waterCpp
+            (Get-Content $waterCpp -Raw) -replace 'reinterpret_cast<uintptr_t>', '(uintptr_t)' | Set-Content $waterCpp
           }
           Get-ChildItem -Filter *.vcxproj -Recurse | ForEach-Object {
             $content = Get-Content $_.FullName -Raw
