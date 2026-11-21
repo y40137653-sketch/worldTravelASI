@@ -1,7 +1,7 @@
 name: Build WorldTravel ASI
 
 on:
-  workflow_dispatch: # 允許手動點擊按鈕觸發編譯
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: 尋找並編譯專案
         run: |
           $sln = Get-ChildItem -Filter *.sln -Recurse | Select-Object -First 1
-          msbuild $sln.FullName /p:Configuration=Release /p:Platform=x64
+          msbuild $sln.FullName /p:Configuration=Release /p:Platform=x64 /p:AdditionalDependencies="Shlwapi.lib;%(AdditionalDependencies)"
 
       - name: 打包產出的 ASI 檔案
         uses: actions/upload-artifact@v4
