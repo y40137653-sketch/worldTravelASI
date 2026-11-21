@@ -14,10 +14,11 @@ jobs:
       - name: 設定 MSBuild 編譯環境
         uses: microsoft/setup-msbuild@v2
 
-      - name: 尋找並編譯專案
+      - name: 尋找並編譯所有專案
         run: |
-          $sln = Get-ChildItem -Filter *.sln -Recurse | Select-Object -First 1
-          msbuild $sln.FullName /p:Configuration=Release /p:Platform=x64 /p:AdditionalDependencies="Shlwapi.lib;%(AdditionalDependencies)"
+          Get-ChildItem -Filter *.sln -Recurse | ForEach-Object {
+            msbuild $_.FullName /p:Configuration=Release /p:Platform=x64 '/p:AdditionalDependencies=Shlwapi.lib;%(AdditionalDependencies)'
+          }
 
       - name: 打包產出的 ASI 檔案
         uses: actions/upload-artifact@v4
