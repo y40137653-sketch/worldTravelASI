@@ -1,0 +1,28 @@
+name: Build WorldTravel ASI
+
+on:
+  workflow_dispatch: # 允許手動點擊按鈕觸發編譯
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 下載原始碼
+        uses: actions/checkout@v4
+
+      - name: 設定 MSBuild 編譯環境
+        uses: microsoft/setup-msbuild@v2
+
+      - name: 尋找並編譯專案
+        run: |
+          $sln = Get-ChildItem -Filter *.sln -Recurse | Select-Object -First 1
+          msbuild $sln.FullName /p:Configuration=Release /p:Platform=x64
+
+      - name: 打包產出的 ASI 檔案
+        uses: actions/upload-artifact@v4
+        with:
+          name: WorldTravel-ASI
+          path: |
+            **/Release/*.asi
+            **/x64/Release/*.asi
