@@ -1,65 +1,39 @@
+name: Build WorldTravel ASI
 
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+on:
+  workflow_dispatch:
 
-Time Elapsed 00:01:06.70
-MSBuild version 18.12.2-1.26514.2+04f6ca984 for .NET Framework
-Build started 11/21/2026 3:23:27 PM.
+jobs:
+  build:
+    runs-on: windows-latest
 
-Project "D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.sln" on node 1 (default targets).
-ValidateSolutionConfiguration:
-  Building solution configuration "Release|x64".
-Project "D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.sln" (1) is building "D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj" (2) on node 1 (default targets).
-PrepareForBuild:
-  Creating directory "WorldTra.B57A545A\x64\Release\".
-  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-  Creating directory "..\bin\x64\Release\".
-  Creating directory "WorldTra.B57A545A\x64\Release\WorldTra.B57A545A.tlog\".
-InitializeBuildStatus:
-  Creating "WorldTra.B57A545A\x64\Release\WorldTra.B57A545A.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-  Touching "WorldTra.B57A545A\x64\Release\WorldTra.B57A545A.tlog\unsuccessfulbuild".
-ClCompile:
-  C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Tools\MSVC\14.44.35207\bin\HostX86\x64\CL.exe /c /I..\dependencies\include /Zi /nologo /W3 /WX- /diagnostics:column /sdl /O2 /Oi /D NDEBUG /D LC_EXPORTS /D _WINDOWS /D _USRDLL /D _WINDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /permissive /Fo"WorldTra.B57A545A\x64\Release\\" /Fd"WorldTra.B57A545A\x64\Release\vc143.pdb" /external:W3 /Gd /TP /FC /errorReport:queue CDataFileMgr.cpp CPathFind.cpp CWaterData.cpp dllmain.cpp Events.cpp GroupMap.cpp Hooking.cpp Hooking.Patterns.cpp Hooking.Stubs.cpp LC.cpp Paths.cpp Settings.cpp UsingAllocator.cpp Water.cpp
-  CDataFileMgr.cpp
-  CPathFind.cpp
-  CWaterData.cpp
-  dllmain.cpp
-  Events.cpp
-  GroupMap.cpp
-  Hooking.cpp
-  Hooking.Patterns.cpp
-  Hooking.Stubs.cpp
-  LC.cpp
-  Paths.cpp
-  Settings.cpp
-  UsingAllocator.cpp
-  Water.cpp
-  Generating Code...
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440: 'reinterpret_cast': cannot convert from 'T' to 'uintptr_t' [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         with [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         [ [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:             T=uintptr_t [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         ] [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-      D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37):
-      Conversion is a valid standard conversion, which can be performed implicitly or by use of static_cast, C-style cast or function-style cast
-  
-Done Building Project "D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj" (default targets) -- FAILED.
-Done Building Project "D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.sln" (default targets) -- FAILED.
+    steps:
+      - name: 下載原始碼
+        uses: actions/checkout@v4
 
-Build FAILED.
+      - name: 設定 MSBuild 編譯環境
+        uses: microsoft/setup-msbuild@v2
 
-"D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.sln" (default target) (1) ->
-"D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj" (default target) (2) ->
-(ClCompile target) -> 
-  D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440: 'reinterpret_cast': cannot convert from 'T' to 'uintptr_t' [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         with [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         [ [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:             T=uintptr_t [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
-D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\Water.cpp(60,37): error C2440:         ] [D:\a\worldTravelASI\worldTravelASI\WorldTravelPatches\src\WorldTravelPatches.vcxproj]
+      - name: 自動修補依賴、SDK 與語法並編譯所有專案
+        run: |
+          $waterCpp = "WorldTravelPatches\src\Water.cpp"
+          if (Test-Path $waterCpp) {
+            (Get-Content $waterCpp -Raw) -replace 'reinterpret_cast<uintptr_t>', 'static_cast<uintptr_t>' | Set-Content $waterCpp
+          }
+          Get-ChildItem -Filter *.vcxproj -Recurse | ForEach-Object {
+            $content = Get-Content $_.FullName -Raw
+            $content = $content -replace 'ScriptHookV\.lib', 'ScriptHookV.lib;Shlwapi.lib'
+            $content = $content -replace '10\.0\.22621\.0', '10.0'
+            Set-Content -Path $_.FullName -Value $content
+          }
+          Get-ChildItem -Filter *.sln -Recurse | ForEach-Object {
+            msbuild $_.FullName /p:Configuration=Release /p:Platform=x64
+          }
 
-    0 Warning(s)
-    1 Error(s)
-
-Time Elapsed 00:00:16.70
-Error: Process completed with exit code 1.
+      - name: 打包產出的 ASI 檔案
+        uses: actions/upload-artifact@v4
+        with:
+          name: WorldTravel-ASI
+          path: |
+            **/Release/*.asi
+            **/x64/Release/*.asi
