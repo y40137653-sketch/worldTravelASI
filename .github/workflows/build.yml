@@ -14,11 +14,12 @@ jobs:
       - name: 設定 MSBuild 編譯環境
         uses: microsoft/setup-msbuild@v2
 
-      - name: 自動修補 Shlwapi.lib 並編譯所有專案
+      - name: 自動修補依賴與 SDK 並編譯所有專案
         run: |
           Get-ChildItem -Filter *.vcxproj -Recurse | ForEach-Object {
             $content = Get-Content $_.FullName -Raw
             $content = $content -replace 'ScriptHookV\.lib', 'ScriptHookV.lib;Shlwapi.lib'
+            $content = $content -replace '10\.0\.22621\.0', '10.0'
             Set-Content -Path $_.FullName -Value $content
           }
           Get-ChildItem -Filter *.sln -Recurse | ForEach-Object {
